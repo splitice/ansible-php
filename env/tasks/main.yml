@@ -4,13 +4,7 @@
 # Ondřej Surý APT repositories [[[
 
 - name: Add Ondrej Sury APT key
-  apt_key:
-    id: '{{ php__sury_apt_key_id }}'
-    state: 'present'
-    keyserver: '{{ ansible_local.core.keyserver
-                   if (ansible_local|d() and ansible_local.core|d() and
-                       ansible_local.core.keyserver)
-                   else "hkp://pool.sks-keyservers.net" }}'
+  shell: wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
   when: php__sury|bool
 
 - name: Add Ondrej Sury repository
